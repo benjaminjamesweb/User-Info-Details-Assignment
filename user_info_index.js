@@ -46,11 +46,15 @@ function generateAllCards(userData = []) {
 
 
 async function getAdditionalDetails(userId) {
+  try {
       const response = await fetch(`${API_URL}/${userId}`);
       const userData = await response.json();
       displayAdditionalDetails(userData);
-    } 
-  
+    } catch (error) {
+      console.log("There was an error", error);
+    }
+  }
+
   function displayAdditionalDetails(user) {
     const userClickedInfo = document.getElementById("user-clicked-info");
     userClickedInfo.innerHTML = `
