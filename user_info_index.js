@@ -4,14 +4,6 @@ let userInfoData = [];
 const userContainer = document.getElementById("user-container");
 
 async function getUserInfo() {
-  // JUST TO UNDERSTAND HOW IT WORKS WITH THEN CATCH BLOCK
-  // fetch(API_URL).then((data) => {
-  //     return data.json();
-  // }).then((dataJSON) => {
-  //     createCardUI();
-  // }).catch((error) => {
-  //     userInfoData = dataInJson.data || [];
-  // })
   try {
     const data = await fetch(API_URL);
     const dataInJson = await data.json();
@@ -65,5 +57,11 @@ async function getAdditionalDetails(userId) {
       <img src="${user.data.avatar}" alt="User Avatar">
     `;
   }
+
+  userContainer.addEventListener("click", async (event) => {
+      const userId = event.target.dataset.userId;
+      await getAdditionalDetails(userId);
+    }
+  );
 
   getUserInfo();
