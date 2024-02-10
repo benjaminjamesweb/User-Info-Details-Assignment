@@ -44,4 +44,22 @@ function generateAllCards(userData = []) {
     }
 }
 
-getUserInfo();
+
+async function getAdditionalDetails(userId) {
+      const response = await fetch(`${API_URL}/${userId}`);
+      const userData = await response.json();
+      displayAdditionalDetails(userData);
+    } 
+  
+  function displayAdditionalDetails(user) {
+    const userClickedInfo = document.getElementById("user-clicked-info");
+    userClickedInfo.innerHTML = `
+      <h2>Additional Details</h2>
+      <p>ID: ${user.data.id}</p>
+      <p>Name: ${user.data.first_name} ${user.data.last_name}</p>
+      <p>Email: ${user.data.email}</p>
+      <img src="${user.data.avatar}" alt="User Avatar">
+    `;
+  }
+
+  getUserInfo();
